@@ -1,38 +1,6 @@
 import "./App.css";
 import React, { useState } from "react";
-import Card from "react-bootstrap/Card";
-
-{
-  /* ------------------------------------------------------------------------------ */
-}
-
-// 카드 컴포넌트
-function TodoCard({ card, deleteCard, markAsDone }) {
-  const { id, title, content, done } = card;
-
-  return (
-    <Card key={id} className="card-box working-card">
-      <Card.Body>
-        <div>
-          <h2>{title}</h2>
-          <p>{content}</p>
-        </div>
-        <div className="cards-button">
-          <button className="card-button1" onClick={() => deleteCard(id)}>
-            삭제하기
-          </button>
-          <button className="card-button2" onClick={() => markAsDone(id)}>
-            {done ? "취소" : "완료"}
-          </button>
-        </div>
-      </Card.Body>
-    </Card>
-  );
-}
-
-{
-  /* ------------------------------------------------------------------------------ */
-}
+import TodoLayout from "./components/TodoLayout";
 
 function App() {
   const [todo, setTodo] = useState("");
@@ -116,46 +84,26 @@ function App() {
       {/* ------------------------------------------------------------------------------ */}
 
       {/* Working 영역 */}
-      <div className="working">
-        <h2 className="working-title">Working...🔥</h2>
-        <div className="card-list">
-          {cards.map((card) => {
-            if (!card.done) {
-              return (
-                <TodoCard
-                  key={card.id}
-                  card={card}
-                  deleteCard={deleteCard}
-                  markAsDone={markAsDone}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-      </div>
+      <TodoLayout
+        title="Working...🔥"
+        cards={cards}
+        deleteCard={deleteCard}
+        markAsDone={markAsDone}
+        isDone={false}
+      />
+      
 
       {/* ------------------------------------------------------------------------------ */}
 
       {/* Done 영역 */}
-      <div className="done">
-        <h2>Done...🎉</h2>
-        <div className="card-list">
-          {cards.map((card) => {
-            if (card.done) {
-              return (
-                <TodoCard
-                  key={card.id}
-                  card={card}
-                  deleteCard={deleteCard}
-                  markAsDone={markAsDone}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-      </div>
+      <TodoLayout
+        title="Done...🎉"
+        cards={cards}
+        deleteCard={deleteCard}
+        markAsDone={markAsDone}
+        isDone={true}
+      />
+      
     </div>
   );
 }
