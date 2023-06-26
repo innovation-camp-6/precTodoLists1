@@ -1,2 +1,1 @@
-# precTodoLists1
-precTodoLists1
+## 이노캠 페어프로젝트 - 영찬-태준 코드리뷰
